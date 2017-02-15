@@ -5,6 +5,15 @@
     <title>Typing Tutor</title>
   </head>
   <body>
-    <textarea name="textarea" rows="20" cols="100">Enter the text you want to practice typing</textarea>
+    <form action="">
+      <textarea name="textarea" id="textbox" rows="20" cols="100">Enter the text you want to practice typing!</textarea><br/>
+      <input type="button" id="submitButton" value="Start practicing"/>
+    </form>
+    <script>
+      var butt = document.getElementById("submitButton");
+      butt.addEventListener('click', function(event) {
+        console.log(document.getElementById("textbox").value);
+      });
+    </script>
   </body>
 </html>
