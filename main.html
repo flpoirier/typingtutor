@@ -47,11 +47,15 @@
         currentLetterIdx = 0;
         allText = document.getElementById("textbox").value.split("");
         for (let idx = 0; idx < allText.length; idx++) {
-          let newDiv = document.createElement("div");
-          newDiv.setAttribute("id", idx);
-          newDiv.className = "untyped";
-          newDiv.innerHTML = allText[idx];
-          parentDiv.appendChild(newDiv);
+          if (allText[idx] === "↵") {
+            // come back to this
+          } else {
+            let newDiv = document.createElement("div");
+            newDiv.setAttribute("id", idx);
+            newDiv.className = "untyped";
+            newDiv.innerHTML = allText[idx];
+            parentDiv.appendChild(newDiv);
+          }
         }
         document.getElementById(currentLetterIdx).className = "current";
         document.getElementById("untypeable").className = "visible";
