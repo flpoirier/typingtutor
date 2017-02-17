@@ -16,6 +16,8 @@
         color: white;
         background-color: green;
       }
+      .not-visible { visibility: hidden; }
+      .visible { visibility: visible; }
       div {
         float: left;
         white-space: pre-wrap;
@@ -27,12 +29,15 @@
     </form>
     <br />
     <div id="textwrapper"></div>
+    <br /><br />
+    <input type="button" class="not-visible" id="untypeable" value="Untypeable character?"/>
     <script>
 
-      let butt = document.getElementById("submitButton");
+      const butt = document.getElementById("submitButton");
+      const badLetter = document.getElementById("untypeable");
+      const parentDiv = document.getElementById("textwrapper");
       let allText;
       let currentLetterIdx;
-      const parentDiv = document.getElementById("textwrapper");
 
       butt.addEventListener('mousedown', function(e) {
         if (e.preventDefault) { e.preventDefault(); }
@@ -46,7 +51,17 @@
           parentDiv.appendChild(newDiv);
         }
         document.getElementById(currentLetterIdx).className = "current";
+        document.getElementById("untypeable").className = "visible";
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
+      });
+
+      badLetter.addEventListener('mousedown', function(e) {
+        if (e.preventDefault) { e.preventDefault(); }
+        let prevLetter = document.getElementById(currentLetterIdx);
+        prevLetter.className = "typed";
+        currentLetterIdx++;
+        let newLetter = document.getElementById(currentLetterIdx);
+        newLetter.className = "current";
       });
 
       function keyPressHandler(e) {
