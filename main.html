@@ -23,13 +23,25 @@
     <br />
     <div id="typedtext"/><div id="wrongtext"/><div id="untypedtext"/>
     <script>
+
       var butt = document.getElementById("submitButton");
       var untypedText = "";
+      var enteredText = [];
+
       butt.addEventListener('click', function(event) {
         untypedText = document.getElementById("textbox").value;
         document.getElementById("untypedtext").innerHTML = untypedText;
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
       });
+
+      function keyDownHandler(e) {
+        enteredText.push(e.keyCode);
+        document.getElementById("typedtext").innerHTML =
+          String.fromCharCode.apply(null, enteredText);
+      }
+
+      document.addEventListener("keydown", keyDownHandler, false);
+
     </script>
   </body>
 </html>
