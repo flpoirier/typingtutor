@@ -10,10 +10,9 @@
         font-size: 18px;
         font-family: sans-serif;
       }
-      #typedtext { color: green; }
-      #wrongtext { color: red; }
-      #untypedtext { color: black; }
-      #currentletter {
+      .typed { color: green; }
+      .untyped { color: black; }
+      .current {
         color: white;
         background-color: green;
       }
@@ -27,35 +26,37 @@
       <input type="button" id="submitButton" value="Start practicing"/>
     </form>
     <br />
-    <div id="typedtext"></div><div id="currentletter"></div><div id="untypedtext"></div>
+    <div id="textwrapper"></div>
     <script>
 
       let butt = document.getElementById("submitButton");
-      let untypedText = "";
-      let typedText = "";
-      let currentLetter = "";
+      let allText;
+      let currentLetterIdx;
+      const parentDiv = document.getElementById("textwrapper");
 
       butt.addEventListener('mousedown', function(e) {
         if (e.preventDefault) { e.preventDefault(); }
-        typedText = "";
-        untypedText = document.getElementById("textbox").value;
-        currentLetter = untypedText[0];
-        untypedText = untypedText.slice(1);
-        document.getElementById("currentletter").innerHTML = currentLetter;
-        document.getElementById("untypedtext").innerHTML = untypedText;
-        document.getElementById("typedtext").innerHTML = typedText;
+        currentLetterIdx = 0;
+        allText = document.getElementById("textbox").value.split("");
+        for (let idx = 0; idx < allText.length; idx++) {
+          let newDiv = document.createElement("div");
+          newDiv.setAttribute("id", idx);
+          newDiv.className = "untyped";
+          newDiv.innerHTML = allText[idx];
+          parentDiv.appendChild(newDiv);
+        }
+        document.getElementById(currentLetterIdx).className = "current";
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
       });
 
       function keyPressHandler(e) {
         if (e.preventDefault) { e.preventDefault(); }
-        if (e.key === currentLetter) {
-          typedText += currentLetter;
-          currentLetter = untypedText[0] || "";
-          untypedText = untypedText.slice(1) || "";
-          document.getElementById("typedtext").innerHTML = typedText;
-          document.getElementById("currentletter").innerHTML = currentLetter;
-          document.getElementById("untypedtext").innerHTML = untypedText;
+        if (e.key === allText[currentLetterIdx]) {
+          let prevLetter = document.getElementById(currentLetterIdx);
+          prevLetter.className = "typed";
+          currentLetterIdx++;
+          let newLetter = document.getElementById(currentLetterIdx);
+          newLetter.className = "current";
         }
       }
 
