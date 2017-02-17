@@ -15,7 +15,10 @@
         font-weight: bold;
         background-color: green;
       }
-      div { float: left; }
+      div {
+        float: left;
+        white-space: pre;
+      }
     </style>
     <form action="">
       <textarea name="textarea" id="textbox" rows="15" cols="100">Enter the text you want to practice typing!</textarea><br/>
@@ -30,8 +33,8 @@
       let typedText = "";
       let currentLetter = "";
 
-      butt.addEventListener('click', function(event) {
-        debugger
+      butt.addEventListener('click', function(e) {
+        if (e.preventDefault) { e.preventDefault(); }
         untypedText = document.getElementById("textbox").value;
         currentLetter = untypedText[0];
         untypedText = untypedText.slice(1);
@@ -41,10 +44,9 @@
       });
 
       function keyDownHandler(e) {
-        debugger
+        if (e.preventDefault) { e.preventDefault(); }
         let str = String.fromCharCode(e.keyCode);
         if (str.toLowerCase() === currentLetter.toLowerCase()) {
-          debugger
           typedText += currentLetter;
           currentLetter = untypedText[0];
           untypedText = untypedText.slice(1);
