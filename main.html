@@ -12,7 +12,6 @@
       #untypedtext { color: black; }
       #currentletter {
         color: white;
-        font-weight: bold;
         background-color: green;
       }
       div {
@@ -33,13 +32,15 @@
       let typedText = "";
       let currentLetter = "";
 
-      butt.addEventListener('click', function(e) {
+      butt.addEventListener('mousedown', function(e) {
         if (e.preventDefault) { e.preventDefault(); }
+        typedText = "";
         untypedText = document.getElementById("textbox").value;
         currentLetter = untypedText[0];
         untypedText = untypedText.slice(1);
         document.getElementById("currentletter").innerHTML = currentLetter;
         document.getElementById("untypedtext").innerHTML = untypedText;
+        document.getElementById("typedtext").innerHTML = typedText;
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
       });
 
@@ -47,8 +48,8 @@
         if (e.preventDefault) { e.preventDefault(); }
         if (e.key === currentLetter) {
           typedText += currentLetter;
-          currentLetter = untypedText[0];
-          untypedText = untypedText.slice(1);
+          currentLetter = untypedText[0] || "";
+          untypedText = untypedText.slice(1) || "";
           document.getElementById("typedtext").innerHTML = typedText;
           document.getElementById("currentletter").innerHTML = currentLetter;
           document.getElementById("untypedtext").innerHTML = untypedText;
