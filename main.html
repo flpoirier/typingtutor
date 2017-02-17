@@ -6,13 +6,16 @@
   </head>
   <body>
     <form action="">
-      <textarea name="textarea" id="textbox" rows="20" cols="100">Enter the text you want to practice typing!</textarea><br/>
+      <textarea name="textarea" id="textbox" rows="15" cols="100">Enter the text you want to practice typing!</textarea><br/>
       <input type="button" id="submitButton" value="Start practicing"/>
     </form>
+    <br />
+    <div id="typingtext"></div>
     <script>
       var butt = document.getElementById("submitButton");
       butt.addEventListener('click', function(event) {
-        console.log(document.getElementById("textbox").value);
+        document.getElementById("typingtext").innerHTML = document.getElementById("textbox").value;
+        document.getElementById("textbox").value = "Enter the text you want to practice typing!";
       });
     </script>
   </body>
