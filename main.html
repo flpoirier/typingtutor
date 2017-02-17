@@ -22,15 +22,19 @@
       <input type="button" id="submitButton" value="Start practicing"/>
     </form>
     <br />
-    <div id="typedtext"></div><div id="wrongtext"></div><div id="untypedtext"></div>
+    <div id="typedtext"></div><div id="currentletter"></div><div id="untypedtext"></div>
     <script>
 
       let butt = document.getElementById("submitButton");
       let untypedText = "";
+      let currentLetter = "";
       let enteredText = [];
 
       butt.addEventListener('click', function(event) {
         untypedText = document.getElementById("textbox").value;
+        currentLetter = untypedText[0];
+        untypedText = untypedText.slice(1);
+        document.getElementById("currentletter").innerHTML = currentLetter;
         document.getElementById("untypedtext").innerHTML = untypedText;
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
       });
