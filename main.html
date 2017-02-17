@@ -41,6 +41,9 @@
 
       butt.addEventListener('mousedown', function(e) {
         if (e.preventDefault) { e.preventDefault(); }
+        while (parentDiv.firstChild) {
+          parentDiv.removeChild(parentDiv.firstChild);
+        }
         currentLetterIdx = 0;
         allText = document.getElementById("textbox").value.split("");
         for (let idx = 0; idx < allText.length; idx++) {
