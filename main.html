@@ -27,10 +27,11 @@
 
       let butt = document.getElementById("submitButton");
       let untypedText = "";
+      let typedText = "";
       let currentLetter = "";
-      let enteredText = [];
 
       butt.addEventListener('click', function(event) {
+        debugger
         untypedText = document.getElementById("textbox").value;
         currentLetter = untypedText[0];
         untypedText = untypedText.slice(1);
@@ -40,9 +41,17 @@
       });
 
       function keyDownHandler(e) {
-        enteredText.push(e.keyCode);
-        document.getElementById("typedtext").innerHTML =
-          String.fromCharCode.apply(null, enteredText).toLowerCase();
+        debugger
+        let str = String.fromCharCode(e.keyCode);
+        if (str.toLowerCase() === currentLetter.toLowerCase()) {
+          debugger
+          typedText += currentLetter;
+          currentLetter = untypedText[0];
+          untypedText = untypedText.slice(1);
+          document.getElementById("typedtext").innerHTML = typedText;
+          document.getElementById("currentletter").innerHTML = currentLetter;
+          document.getElementById("untypedtext").innerHTML = untypedText;
+        }
       }
 
       document.addEventListener("keydown", keyDownHandler, false);
