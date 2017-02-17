@@ -5,16 +5,29 @@
     <title>Typing Tutor</title>
   </head>
   <body>
+    <style>
+      body { font-size: 22px; }
+      #typedtext { color: green; }
+      #wrongtext { color: red; }
+      #untypedtext { color: black; }
+      #currentletter {
+        color: white;
+        font-weight: bold;
+        background-color: green;
+      }
+    </style>
     <form action="">
       <textarea name="textarea" id="textbox" rows="15" cols="100">Enter the text you want to practice typing!</textarea><br/>
       <input type="button" id="submitButton" value="Start practicing"/>
     </form>
     <br />
-    <div id="typingtext"></div>
+    <div id="typedtext"/><div id="wrongtext"/><div id="untypedtext"/>
     <script>
       var butt = document.getElementById("submitButton");
+      var untypedText = "";
       butt.addEventListener('click', function(event) {
-        document.getElementById("typingtext").innerHTML = document.getElementById("textbox").value;
+        untypedText = document.getElementById("textbox").value;
+        document.getElementById("untypedtext").innerHTML = untypedText;
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
       });
     </script>
