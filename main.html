@@ -15,18 +15,19 @@
         font-weight: bold;
         background-color: green;
       }
+      div { float: left; }
     </style>
     <form action="">
       <textarea name="textarea" id="textbox" rows="15" cols="100">Enter the text you want to practice typing!</textarea><br/>
       <input type="button" id="submitButton" value="Start practicing"/>
     </form>
     <br />
-    <div id="typedtext"/><div id="wrongtext"/><div id="untypedtext"/>
+    <div id="typedtext"></div><div id="wrongtext"></div><div id="untypedtext"></div>
     <script>
 
-      var butt = document.getElementById("submitButton");
-      var untypedText = "";
-      var enteredText = [];
+      let butt = document.getElementById("submitButton");
+      let untypedText = "";
+      let enteredText = [];
 
       butt.addEventListener('click', function(event) {
         untypedText = document.getElementById("textbox").value;
@@ -37,7 +38,7 @@
       function keyDownHandler(e) {
         enteredText.push(e.keyCode);
         document.getElementById("typedtext").innerHTML =
-          String.fromCharCode.apply(null, enteredText);
+          String.fromCharCode.apply(null, enteredText).toLowerCase();
       }
 
       document.addEventListener("keydown", keyDownHandler, false);
