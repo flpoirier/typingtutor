@@ -43,10 +43,9 @@
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
       });
 
-      function keyDownHandler(e) {
+      function keyPressHandler(e) {
         if (e.preventDefault) { e.preventDefault(); }
-        let str = String.fromCharCode(e.keyCode);
-        if (str.toLowerCase() === currentLetter.toLowerCase()) {
+        if (e.key === currentLetter) {
           typedText += currentLetter;
           currentLetter = untypedText[0];
           untypedText = untypedText.slice(1);
@@ -56,7 +55,7 @@
         }
       }
 
-      document.addEventListener("keydown", keyDownHandler, false);
+      document.addEventListener("keypress", keyPressHandler, false);
 
     </script>
   </body>
