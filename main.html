@@ -16,6 +16,7 @@
         color: white;
         background-color: green;
       }
+      .wrong { color: red; }
       .not-visible { visibility: hidden; }
       .visible { visibility: visible; }
       div {
@@ -76,6 +77,12 @@
         if (e.key === allText[currentLetterIdx]) {
           let prevLetter = document.getElementById(currentLetterIdx);
           prevLetter.className = "typed";
+          currentLetterIdx++;
+          let newLetter = document.getElementById(currentLetterIdx);
+          newLetter.className = "current";
+        } else {
+          let prevLetter = document.getElementById(currentLetterIdx);
+          prevLetter.className = "wrong";
           currentLetterIdx++;
           let newLetter = document.getElementById(currentLetterIdx);
           newLetter.className = "current";
