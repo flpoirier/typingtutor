@@ -14,6 +14,10 @@
         display: block;
         white-space: pre-wrap;
       }
+      #textwrapper {
+        width: 620px;
+        /*border: 1px solid red;*/
+      }
       .typed {
         color: green;
         float: left;
@@ -68,11 +72,7 @@
         allText = replacements(document.getElementById("textbox").value.split(""));
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx].match(/\n/g)) {
-            let newDiv = document.createElement("div");
-            newDiv.setAttribute("id", idx);
-            newDiv.className = "break";
-            newDiv.innerHTML = "↵";
-            parentDiv.appendChild(newDiv);
+            addNewLines(idx);
           } else {
             let newDiv = document.createElement("div");
             newDiv.setAttribute("id", idx);
@@ -94,6 +94,28 @@
         let newLetter = document.getElementById(currentLetterIdx);
         newLetter.className = "current";
       });
+
+      function addNewLines(idx) {
+        if (!allText[idx - 1].match(/\n/g) && !allText[idx + 1].match(/\n/g)) {
+          // add two lines if there's only one new line
+          let newDiv = document.createElement("div");
+          newDiv.setAttribute("id", idx);
+          newDiv.className = "break";
+          newDiv.innerHTML = "↵";
+          parentDiv.appendChild(newDiv);
+          newDiv = document.createElement("div");
+          newDiv.setAttribute("id", idx);
+          newDiv.className = "break";
+          newDiv.innerHTML = " ";
+          parentDiv.appendChild(newDiv);
+        } else {
+          let newDiv = document.createElement("div");
+          newDiv.setAttribute("id", idx);
+          newDiv.className = "break";
+          newDiv.innerHTML = "↵";
+          parentDiv.appendChild(newDiv);
+        }
+      }
 
       function replacements(text) {
         let replace = {
