@@ -44,17 +44,24 @@
         clear: right;
         float: none;
       }
+      #untypeable {
+        content: "";
+        display: block;
+        clear: both;
+        float: none;
+        padding-top: 15px;
+      }
       .not-visible { visibility: hidden; }
       .visible { visibility: visible; }
     </style>
     <form action="">
-      <textarea name="textarea" id="textbox" rows="15" cols="100">Enter the text you want to practice typing!</textarea><br/>
+      <textarea name="textarea" id="textbox" rows="7" cols="100">Enter the text you want to practice typing!</textarea><br/>
       <input type="button" id="submitButton" value="Start practicing"/>
     </form>
     <br />
     <div id="textwrapper"></div>
     <br /><br />
-    <input type="button" class="not-visible" id="untypeable" value="Untypeable character?"/>
+    <div id="untypeable" class="not-visible"><input type="button" value="Untypeable character?"/></div>
     <script>
 
       const butt = document.getElementById("submitButton");
