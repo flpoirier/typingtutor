@@ -16,7 +16,10 @@
         color: white;
         background-color: green;
       }
-      .wrong { color: red; }
+      .wrong {
+        color: white;
+        background-color: red;
+      }
       .not-visible { visibility: hidden; }
       .visible { visibility: visible; }
       div {
@@ -89,8 +92,19 @@
         }
       }
 
-      document.addEventListener("keypress", keyPressHandler, false);
+      function keyDownHandler(e) {
+        if (e.key === "Backspace" && currentLetterIdx > 0) {
+          let prevLetterIdx = currentLetterIdx - 1;
+          let prevLetter = document.getElementById(prevLetterIdx);
+          let currentLetter = document.getElementById(currentLetterIdx);
+          currentLetter.className = "untyped";
+          prevLetter.className = "current";
+          currentLetterIdx = prevLetterIdx;
+        }
+      }
 
+      document.addEventListener("keypress", keyPressHandler, false);
+      document.addEventListener("keydown", keyDownHandler, false);
     </script>
   </body>
 </html>
