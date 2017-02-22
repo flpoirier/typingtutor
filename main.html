@@ -20,6 +20,11 @@
         color: white;
         background-color: red;
       }
+      .break {
+        content: "";
+        display: block;
+        clear: both;
+      }
       .not-visible { visibility: hidden; }
       .visible { visibility: visible; }
       div {
@@ -50,9 +55,14 @@
         }
         currentLetterIdx = 0;
         allText = replacements(document.getElementById("textbox").value.split(""));
+        debugger
         for (let idx = 0; idx < allText.length; idx++) {
-          if (allText[idx] === "↵") {
-            // come back to this
+          if (allText[idx].match(/\n/g)) {
+            let newDiv = document.createElement("div");
+            newDiv.setAttribute("id", idx);
+            newDiv.className = "break";
+            newDiv.innerHTML = allText[idx];
+            parentDiv.appendChild(newDiv);
           } else {
             let newDiv = document.createElement("div");
             newDiv.setAttribute("id", idx);
@@ -76,7 +86,12 @@
       });
 
       function replacements(text) {
-        let replace = { "’": "'" };
+        let replace = {
+          "’": "'",
+          "—": "-",
+          "“": "\"",
+          "”": "\""
+        };
         for (let idx = 0; idx < text.length; idx++) {
           let sym = text[idx];
           if (sym in replace) {
