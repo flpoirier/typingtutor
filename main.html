@@ -49,7 +49,7 @@
           parentDiv.removeChild(parentDiv.firstChild);
         }
         currentLetterIdx = 0;
-        allText = document.getElementById("textbox").value.split("");
+        allText = replacements(document.getElementById("textbox").value.split(""));
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx] === "↵") {
             // come back to this
@@ -74,6 +74,17 @@
         let newLetter = document.getElementById(currentLetterIdx);
         newLetter.className = "current";
       });
+
+      function replacements(text) {
+        let replace = { "’": "'" };
+        for (let idx = 0; idx < text.length; idx++) {
+          let sym = text[idx];
+          if (sym in replace) {
+            text[idx] = replace[sym];
+          }
+        }
+        return text;
+      }
 
       function keyPressHandler(e) {
         if (e.preventDefault) { e.preventDefault(); }
