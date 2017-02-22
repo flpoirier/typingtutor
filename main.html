@@ -10,27 +10,35 @@
         font-size: 18px;
         font-family: sans-serif;
       }
-      .typed { color: green; }
-      .untyped { color: black; }
+      div {
+        display: block;
+        white-space: pre-wrap;
+      }
+      .typed {
+        color: green;
+        float: left;
+      }
+      .untyped {
+        color: black;
+        float: left;
+      }
       .current {
         color: white;
         background-color: green;
+        float: left;
       }
       .wrong {
         color: white;
         background-color: red;
+        float: left;
       }
       .break {
         content: "";
         display: block;
-        clear: both;
+        clear: right;
       }
       .not-visible { visibility: hidden; }
       .visible { visibility: visible; }
-      div {
-        float: left;
-        white-space: pre-wrap;
-      }
     </style>
     <form action="">
       <textarea name="textarea" id="textbox" rows="15" cols="100">Enter the text you want to practice typing!</textarea><br/>
@@ -55,13 +63,12 @@
         }
         currentLetterIdx = 0;
         allText = replacements(document.getElementById("textbox").value.split(""));
-        debugger
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx].match(/\n/g)) {
             let newDiv = document.createElement("div");
             newDiv.setAttribute("id", idx);
             newDiv.className = "break";
-            newDiv.innerHTML = allText[idx];
+            newDiv.innerHTML = "↵";
             parentDiv.appendChild(newDiv);
           } else {
             let newDiv = document.createElement("div");
@@ -103,7 +110,13 @@
 
       function keyPressHandler(e) {
         if (e.preventDefault) { e.preventDefault(); }
-        if (e.key === allText[currentLetterIdx]) {
+        if (e.key === "Enter" && allText[currentLetterIdx].match(/\n/g)) {
+          let prevLetter = document.getElementById(currentLetterIdx);
+          prevLetter.className = "typed";
+          currentLetterIdx++;
+          let newLetter = document.getElementById(currentLetterIdx);
+          newLetter.className = "current";
+        } else if (e.key === allText[currentLetterIdx]) {
           let prevLetter = document.getElementById(currentLetterIdx);
           prevLetter.className = "typed";
           currentLetterIdx++;
