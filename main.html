@@ -7,8 +7,8 @@
   <body>
     <style>
       body {
-        font-size: 18px;
-        font-family: sans-serif;
+        font-size: 17px;
+        font-family: "PT Sans", sans-serif;
       }
       div {
         display: block;
@@ -36,6 +36,7 @@
         content: "";
         display: block;
         clear: right;
+        float: none;
       }
       .not-visible { visibility: hidden; }
       .visible { visibility: visible; }
@@ -96,6 +97,7 @@
         let replace = {
           "’": "'",
           "—": "-",
+          "–": "-",
           "“": "\"",
           "”": "\""
         };
@@ -110,23 +112,26 @@
 
       function keyPressHandler(e) {
         if (e.preventDefault) { e.preventDefault(); }
+        let newLetter;
         if (e.key === "Enter" && allText[currentLetterIdx].match(/\n/g)) {
           let prevLetter = document.getElementById(currentLetterIdx);
-          prevLetter.className = "typed";
+          prevLetter.className = "break typed";
           currentLetterIdx++;
-          let newLetter = document.getElementById(currentLetterIdx);
-          newLetter.className = "current";
+          newLetter = document.getElementById(currentLetterIdx);
         } else if (e.key === allText[currentLetterIdx]) {
           let prevLetter = document.getElementById(currentLetterIdx);
           prevLetter.className = "typed";
           currentLetterIdx++;
-          let newLetter = document.getElementById(currentLetterIdx);
-          newLetter.className = "current";
+          newLetter = document.getElementById(currentLetterIdx);
         } else {
           let prevLetter = document.getElementById(currentLetterIdx);
           prevLetter.className = "wrong";
           currentLetterIdx++;
-          let newLetter = document.getElementById(currentLetterIdx);
+          newLetter = document.getElementById(currentLetterIdx);
+        }
+        if (newLetter.innerHTML === "↵") {
+          newLetter.className = "break current";
+        } else {
           newLetter.className = "current";
         }
       }
