@@ -23,6 +23,7 @@
       let paragraph = document.createElement("div");
       word.className = "word";
       paragraph.className = "paragraph";
+      let skipMe = [];
       let allText;
       let currentLetterIdx;
       let maxLetterIdx;
@@ -83,6 +84,12 @@
 
       function newParagraph() {
         if (paragraph.firstChild) {
+          if (paragraph.firstChild.firstChild) {
+            if (paragraph.firstChild.firstChild.innerHTML === "↵") {
+              skipMe.push(paragraph.firstChild.firstChild.id);
+              paragraph.firstChild.firstChild.innerHTML = " ";
+            }
+          }
           parentDiv.appendChild(paragraph);
           paragraph = document.createElement("div");
           paragraph.className = "paragraph";
@@ -141,6 +148,9 @@
 
       function currentLetterIncrement() {
         if (currentLetterIdx <= maxLetterIdx) {
+          currentLetterIdx++;
+        }
+        if (skipMe.includes( currentLetterIdx.toString() )) {
           currentLetterIdx++;
         }
       }
