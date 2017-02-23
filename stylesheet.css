@@ -2,44 +2,52 @@ body {
   font-size: 17px;
   font-family: "PT Sans", sans-serif;
 }
+
 div {
   display: block;
   white-space: pre-wrap;
 }
+
 #textwrapper {
   width: 620px;
   /*border: 1px solid red;*/
 }
+
 .typed {
   color: green;
   float: left;
   background-color: white;
 }
+
 .untyped {
   color: black;
   float: left;
   background-color: white;
 }
+
 .current {
   color: white;
   background-color: green;
   float: left;
 }
+
 .wrong {
   color: white;
   background-color: red;
   float: left;
 }
+
 .break {
   content: "";
-  display: block;
-  clear: left;
-  float: none;
+  display: inline-block;
+  clear: right;
 }
+
 .word {
   display: inline-block;
   white-space: normal;
 }
+
 #untypeable {
   content: "";
   display: block;
@@ -47,5 +55,11 @@ div {
   float: none;
   padding-top: 15px;
 }
-.not-visible { visibility: hidden; }
-.visible { visibility: visible; }
+
+.not-visible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
