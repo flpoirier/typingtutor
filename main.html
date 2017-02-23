@@ -3,57 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Typing Tutor</title>
+    <link rel="stylesheet" href="stylesheet.css">
   </head>
   <body>
-    <style>
-      body {
-        font-size: 17px;
-        font-family: "PT Sans", sans-serif;
-      }
-      div {
-        display: block;
-        white-space: pre-wrap;
-      }
-      #textwrapper {
-        width: 620px;
-        /*border: 1px solid red;*/
-      }
-      .typed {
-        color: green;
-        float: left;
-        background-color: white;
-      }
-      .untyped {
-        color: black;
-        float: left;
-        background-color: white;
-      }
-      .current {
-        color: white;
-        background-color: green;
-        float: left;
-      }
-      .wrong {
-        color: white;
-        background-color: red;
-        float: left;
-      }
-      .break {
-        content: "";
-        display: block;
-        clear: right;
-        float: none;
-      }
-      #untypeable {
-        content: "";
-        display: block;
-        clear: both;
-        float: none;
-        padding-top: 15px;
-      }
-      .not-visible { visibility: hidden; }
-      .visible { visibility: visible; }
-    </style>
     <form action="">
       <textarea name="textarea" id="textbox" rows="7" cols="100">Enter the text you want to practice typing!</textarea><br/>
       <input type="button" id="submitButton" value="Start practicing"/>
