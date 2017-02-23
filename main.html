@@ -91,15 +91,17 @@
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          paragraph.appendChild(newDiv);
+          word.appendChild(newDiv);
 
+          newWord();
           newParagraph();
 
           newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = " ";
-          paragraph.appendChild(newDiv);
+          word.appendChild(newDiv);
+          newWord();
 
         } else {
 
@@ -107,7 +109,8 @@
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          paragraph.appendChild(newDiv);
+          word.appendChild(newDiv);
+          newWord();
 
         }
       }
