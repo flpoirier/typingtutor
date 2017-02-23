@@ -19,6 +19,8 @@
       const butt = document.getElementById("submitButton");
       const badLetter = document.getElementById("untypeable");
       const parentDiv = document.getElementById("textwrapper");
+      let word = document.createElement("div");
+      word.className = "word";
       let allText;
       let currentLetterIdx;
 
@@ -31,13 +33,22 @@
         allText = replacements(document.getElementById("textbox").value.split(""));
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx].match(/\n/g)) {
-            addNewLines(idx);
+            addNewLines(idx, word);
+          } else if (allText[idx] === " ") {
+            let newDiv = document.createElement("div");
+            newDiv.setAttribute("id", idx);
+            newDiv.className = "untyped";
+            newDiv.innerHTML = allText[idx];
+            word.appendChild(newDiv);
+            parentDiv.appendChild(word);
+            word = document.createElement("div");
+            word.className = "word";
           } else {
             let newDiv = document.createElement("div");
             newDiv.setAttribute("id", idx);
             newDiv.className = "untyped";
             newDiv.innerHTML = allText[idx];
-            parentDiv.appendChild(newDiv);
+            word.appendChild(newDiv);
           }
         }
         document.getElementById(currentLetterIdx).className = "current";
@@ -54,25 +65,35 @@
         newLetter.className = "current";
       });
 
-      function addNewLines(idx) {
+      function addNewLines(idx, word) {
         if (!allText[idx - 1].match(/\n/g) && !allText[idx + 1].match(/\n/g)) {
           // add two lines if there's only one new line
           let newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          parentDiv.appendChild(newDiv);
+          word.appendChild(newDiv);
+          parentDiv.appendChild(word);
+          word = document.createElement("div");
+          word.className = "word";
+
           newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = " ";
-          parentDiv.appendChild(newDiv);
+          word.appendChild(newDiv);
+          parentDiv.appendChild(word);
+          word = document.createElement("div");
+          word.className = "word";
         } else {
           let newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          parentDiv.appendChild(newDiv);
+          word.appendChild(newDiv);
+          parentDiv.appendChild(word);
+          word = document.createElement("div");
+          word.className = "word";
         }
       }
 

@@ -36,6 +36,10 @@ div {
   clear: right;
   float: none;
 }
+.word {
+  display: inline-block;
+  white-space: normal;
+}
 #untypeable {
   content: "";
   display: block;
