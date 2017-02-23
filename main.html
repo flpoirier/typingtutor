@@ -33,6 +33,7 @@
         allText = replacements(document.getElementById("textbox").value.split(""));
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx].match(/\n/g)) {
+            newWord();
             addNewLines(idx);
           } else if (allText[idx] === " ") {
             let newDiv = document.createElement("div");
@@ -40,9 +41,7 @@
             newDiv.className = "untyped";
             newDiv.innerHTML = allText[idx];
             word.appendChild(newDiv);
-            parentDiv.appendChild(word);
-            word = document.createElement("div");
-            word.className = "word";
+            newWord();
           } else {
             let newDiv = document.createElement("div");
             newDiv.setAttribute("id", idx);
@@ -65,35 +64,38 @@
         newLetter.className = "current";
       });
 
+      function newWord() {
+        if (word.firstChild) {
+          parentDiv.appendChild(word);
+          word = document.createElement("div");
+          word.className = "word";
+        }
+      }
+
       function addNewLines(idx) {
         if (!allText[idx - 1].match(/\n/g) && !allText[idx + 1].match(/\n/g)) {
           // add two lines if there's only one new line
+
           let newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          word.appendChild(newDiv);
-          parentDiv.appendChild(word);
-          word = document.createElement("div");
-          word.className = "word";
+          parentDiv.appendChild(newDiv);
 
           newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = " ";
-          word.appendChild(newDiv);
-          parentDiv.appendChild(word);
-          word = document.createElement("div");
-          word.className = "word";
+          parentDiv.appendChild(newDiv);
+
         } else {
+
           let newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          word.appendChild(newDiv);
-          parentDiv.appendChild(word);
-          word = document.createElement("div");
-          word.className = "word";
+          parentDiv.appendChild(newDiv);
+
         }
       }
 

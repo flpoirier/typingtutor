@@ -33,7 +33,7 @@ div {
 .break {
   content: "";
   display: block;
-  clear: right;
+  clear: left;
   float: none;
 }
 .word {
