@@ -25,6 +25,7 @@
       paragraph.className = "paragraph";
       let allText;
       let currentLetterIdx;
+      let maxLetterIdx;
 
       butt.addEventListener('mousedown', function(e) {
         if (e.preventDefault) { e.preventDefault(); }
@@ -33,6 +34,7 @@
         }
         currentLetterIdx = 0;
         allText = replacements(document.getElementById("textbox").value.split(""));
+        maxLetterIdx = allText.length - 1;
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx].match(/\n/g)) {
             newWord();
@@ -53,6 +55,10 @@
             word.appendChild(newDiv);
           }
         }
+
+        paragraph.appendChild(word);
+        parentDiv.appendChild(paragraph);
+
         document.getElementById(currentLetterIdx).className = "current";
         document.getElementById("untypeable").className = "visible";
         document.getElementById("textbox").value = "Enter the text you want to practice typing!";
@@ -84,6 +90,7 @@
       }
 
       function addNewLines(idx) {
+
         if (!allText[idx - 1].match(/\n/g) && !allText[idx + 1].match(/\n/g)) {
           // add two lines if there's only one new line
 
@@ -132,26 +139,36 @@
         return text;
       }
 
+      function currentLetterIncrement() {
+        if (currentLetterIdx <= maxLetterIdx) {
+          currentLetterIdx++;
+        }
+      }
+
       function keyPressHandler(e) {
         if (e.preventDefault) { e.preventDefault(); }
         let newLetter;
         if (e.key === "Enter" && allText[currentLetterIdx].match(/\n/g)) {
           let prevLetter = document.getElementById(currentLetterIdx);
           prevLetter.className = "break typed";
-          currentLetterIdx++;
+          currentLetterIncrement();
           newLetter = document.getElementById(currentLetterIdx);
         } else if (e.key === allText[currentLetterIdx]) {
           let prevLetter = document.getElementById(currentLetterIdx);
           prevLetter.className = "typed";
-          currentLetterIdx++;
+          currentLetterIncrement();
           newLetter = document.getElementById(currentLetterIdx);
         } else {
           let prevLetter = document.getElementById(currentLetterIdx);
           prevLetter.className = "wrong";
-          currentLetterIdx++;
+          currentLetterIncrement();
           newLetter = document.getElementById(currentLetterIdx);
         }
-        if (newLetter.innerHTML === "↵") {
+
+        if (currentLetterIdx > maxLetterIdx) {
+          newLetter = document.getElementById(maxLetterIdx);
+          newLetter.className = "typed";
+        } else if (newLetter.innerHTML === "↵") {
           newLetter.className = "break current";
         } else {
           newLetter.className = "current";
