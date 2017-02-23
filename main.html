@@ -33,7 +33,7 @@
         allText = replacements(document.getElementById("textbox").value.split(""));
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx].match(/\n/g)) {
-            addNewLines(idx, word);
+            addNewLines(idx);
           } else if (allText[idx] === " ") {
             let newDiv = document.createElement("div");
             newDiv.setAttribute("id", idx);
@@ -65,7 +65,7 @@
         newLetter.className = "current";
       });
 
-      function addNewLines(idx, word) {
+      function addNewLines(idx) {
         if (!allText[idx - 1].match(/\n/g) && !allText[idx + 1].match(/\n/g)) {
           // add two lines if there's only one new line
           let newDiv = document.createElement("div");
