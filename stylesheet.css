@@ -38,9 +38,7 @@ div {
 }
 
 .break {
-  content: "";
   display: inline-block;
-  clear: right;
 }
 
 .word {

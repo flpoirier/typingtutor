@@ -20,7 +20,9 @@
       const badLetter = document.getElementById("untypeable");
       const parentDiv = document.getElementById("textwrapper");
       let word = document.createElement("div");
+      let paragraph = document.createElement("div");
       word.className = "word";
+      paragraph.className = "paragraph";
       let allText;
       let currentLetterIdx;
 
@@ -35,6 +37,7 @@
           if (allText[idx].match(/\n/g)) {
             newWord();
             addNewLines(idx);
+            newParagraph();
           } else if (allText[idx] === " ") {
             let newDiv = document.createElement("div");
             newDiv.setAttribute("id", idx);
@@ -66,9 +69,17 @@
 
       function newWord() {
         if (word.firstChild) {
-          parentDiv.appendChild(word);
+          paragraph.appendChild(word);
           word = document.createElement("div");
           word.className = "word";
+        }
+      }
+
+      function newParagraph() {
+        if (paragraph.firstChild) {
+          parentDiv.appendChild(paragraph);
+          paragraph = document.createElement("div");
+          paragraph.className = "paragraph";
         }
       }
 
@@ -80,13 +91,15 @@
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          parentDiv.appendChild(newDiv);
+          paragraph.appendChild(newDiv);
+
+          newParagraph();
 
           newDiv = document.createElement("div");
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = " ";
-          parentDiv.appendChild(newDiv);
+          paragraph.appendChild(newDiv);
 
         } else {
 
@@ -94,7 +107,7 @@
           newDiv.setAttribute("id", idx);
           newDiv.className = "break";
           newDiv.innerHTML = "↵";
-          parentDiv.appendChild(newDiv);
+          paragraph.appendChild(newDiv);
 
         }
       }
