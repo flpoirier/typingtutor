@@ -6,13 +6,11 @@
     <link rel="stylesheet" href="stylesheet.css">
   </head>
   <body>
-    <form action="">
+    <form action="" id="submitForm">
       <textarea name="textarea" id="textbox" rows="7" cols="100">Enter the text you want to practice typing!</textarea><br/>
       <input type="button" id="submitButton" value="Start practicing"/>
     </form>
-    <br />
     <div id="textwrapper"></div>
-    <br /><br />
     <div id="untypeable" class="not-visible"><input type="button" value="Untypeable character?"/></div>
     <script>
 
@@ -62,7 +60,12 @@
 
         document.getElementById(currentLetterIdx).className = "current";
         document.getElementById("untypeable").className = "visible";
-        document.getElementById("textbox").value = "Enter the text you want to practice typing!";
+        // document.getElementById("textbox").value = "Enter the text you want to practice typing!";
+        // document.getElementById("textbox").className = "not-visible";
+        // document.getElementById("submitButton").className = "not-visible";
+
+        let submitForm = document.getElementById("submitForm");
+        submitForm.parentNode.removeChild(submitForm);
       });
 
       badLetter.addEventListener('mousedown', function(e) {
