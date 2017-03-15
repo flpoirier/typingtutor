@@ -28,6 +28,8 @@
       let allText;
       let currentLetterIdx;
       let maxLetterIdx;
+      let startTime;
+      let endTime;
 
       rand.addEventListener('mousedown', function(e) {
         if (e.preventDefault) { e.preventDefault(); }
@@ -83,6 +85,7 @@
         let submitForm = document.getElementById("submitForm");
         submitForm.parentNode.removeChild(submitForm);
         addEventListeners();
+        startTime = new Date();
       }
 
       function addEventListeners() {
@@ -204,11 +207,18 @@
         if (currentLetterIdx > maxLetterIdx) {
           newLetter = document.getElementById(maxLetterIdx);
           newLetter.className = "typed";
+          gameOver();
         } else if (newLetter.innerHTML === "↵") {
           newLetter.className = "break current";
         } else {
           newLetter.className = "current";
         }
+      }
+
+      function gameOver() {
+        endTime = new Date();
+        console.log("Game over!");
+        console.log(`That took ${(endTime - startTime) / 1000} seconds!`);
       }
 
       function keyDownHandler(e) {
