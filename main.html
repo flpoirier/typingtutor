@@ -66,16 +66,21 @@
 
         let submitForm = document.getElementById("submitForm");
         submitForm.parentNode.removeChild(submitForm);
+        addEventListeners();
       });
 
-      badLetter.addEventListener('mousedown', function(e) {
-        if (e.preventDefault) { e.preventDefault(); }
-        let prevLetter = document.getElementById(currentLetterIdx);
-        prevLetter.className = "typed";
-        currentLetterIdx++;
-        let newLetter = document.getElementById(currentLetterIdx);
-        newLetter.className = "current";
-      });
+      function addEventListeners() {
+        document.addEventListener("keypress", keyPressHandler, false);
+        document.addEventListener("keydown", keyDownHandler, false);
+        badLetter.addEventListener('mousedown', function(e) {
+          if (e.preventDefault) { e.preventDefault(); }
+          let prevLetter = document.getElementById(currentLetterIdx);
+          prevLetter.className = "typed";
+          currentLetterIdx++;
+          let newLetter = document.getElementById(currentLetterIdx);
+          newLetter.className = "current";
+        });
+      }
 
       function newWord() {
         if (word.firstChild) {
@@ -201,8 +206,6 @@
         }
       }
 
-      document.addEventListener("keypress", keyPressHandler, false);
-      document.addEventListener("keydown", keyDownHandler, false);
     </script>
   </body>
 </html>
