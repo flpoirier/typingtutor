@@ -9,6 +9,7 @@
     <form action="" id="submitForm">
       <textarea name="textarea" id="textbox" rows="7" cols="100">Enter the text you want to practice typing!</textarea><br/>
       <input type="button" id="submitButton" value="Start practicing"/>
+      <input type="button" id="randomButton" value="Give me random text"/>
     </form>
     <div id="textwrapper"></div>
     <div id="untypeable" class="not-visible"><input type="button" value="Untypeable character?"/></div>
@@ -16,6 +17,7 @@
     <script>
 
       const butt = document.getElementById("submitButton");
+      const rand = document.getElementById("randomButton");
       const badLetter = document.getElementById("untypeable");
       const parentDiv = document.getElementById("textwrapper");
       let word = document.createElement("div");
@@ -27,13 +29,26 @@
       let currentLetterIdx;
       let maxLetterIdx;
 
+      rand.addEventListener('mousedown', function(e) {
+        if (e.preventDefault) { e.preventDefault(); }
+        while (parentDiv.firstChild) {
+          parentDiv.removeChild(parentDiv.firstChild);
+        }
+        allText = excerpts[Math.floor(Math.random()*excerpts.length)];
+        processText();
+      });
+
       butt.addEventListener('mousedown', function(e) {
         if (e.preventDefault) { e.preventDefault(); }
         while (parentDiv.firstChild) {
           parentDiv.removeChild(parentDiv.firstChild);
         }
-        currentLetterIdx = 0;
         allText = replacements(document.getElementById("textbox").value.split(""));
+        processText();
+      });
+
+      function processText() {
+        currentLetterIdx = 0;
         maxLetterIdx = allText.length - 1;
         for (let idx = 0; idx < allText.length; idx++) {
           if (allText[idx].match(/\n/g)) {
@@ -68,7 +83,7 @@
         let submitForm = document.getElementById("submitForm");
         submitForm.parentNode.removeChild(submitForm);
         addEventListeners();
-      });
+      }
 
       function addEventListeners() {
         document.addEventListener("keypress", keyPressHandler, false);
