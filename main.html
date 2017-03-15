@@ -28,6 +28,7 @@
       let allText;
       let currentLetterIdx;
       let maxLetterIdx;
+      let numWords = 1;
       let startTime;
       let endTime;
 
@@ -102,6 +103,7 @@
       }
 
       function newWord() {
+        numWords++;
         if (word.firstChild) {
           paragraph.appendChild(word);
           word = document.createElement("div");
@@ -164,7 +166,10 @@
           "—": "-",
           "–": "-",
           "“": "\"",
-          "”": "\""
+          "”": "\"",
+          "—": "-",
+          "’": "'",
+          "’": "'"
         };
         for (let idx = 0; idx < text.length; idx++) {
           let sym = text[idx];
@@ -217,8 +222,11 @@
 
       function gameOver() {
         endTime = new Date();
+        let seconds = (endTime - startTime) / 1000;
         console.log("Game over!");
-        console.log(`That took ${(endTime - startTime) / 1000} seconds!`);
+        console.log(`That took ${seconds} seconds!`);
+        console.log(`You type ${Math.floor(60*numWords/seconds)} words per minute.`);
+        console.log("Nice job!");
       }
 
       function keyDownHandler(e) {
