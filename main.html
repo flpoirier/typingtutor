@@ -13,6 +13,8 @@
     </form>
     <div id="textwrapper"></div>
     <div id="untypeable" class="not-visible"><input type="button" value="Untypeable character?"/></div>
+    <br>
+    <div id="results"></div>
     <script type="text/javascript" src="textexcerpts.js"></script>
     <script>
 
@@ -223,10 +225,23 @@
       function gameOver() {
         endTime = new Date();
         let seconds = (endTime - startTime) / 1000;
-        console.log("Game over!");
-        console.log(`That took ${seconds} seconds!`);
-        console.log(`You type ${Math.floor(60*numWords/seconds)} words per minute.`);
-        console.log("Nice job!");
+        let results = document.getElementById("results");
+
+        let par = document.createElement("div");
+        par.innerHTML = "Game over!";
+        results.appendChild(par);
+
+        par = document.createElement("div");
+        par.innerHTML = `That took ${seconds} seconds!`;
+        results.appendChild(par);
+
+        par = document.createElement("div");
+        par.innerHTML = `You type ${Math.floor(60*numWords/seconds)} words per minute.`;
+        results.appendChild(par);
+
+        par = document.createElement("div");
+        par.innerHTML = "Nice job!";
+        results.appendChild(par);
       }
 
       function keyDownHandler(e) {
