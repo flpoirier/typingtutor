@@ -40,6 +40,7 @@
           parentDiv.removeChild(parentDiv.firstChild);
         }
         allText = excerpts[Math.floor(Math.random()*excerpts.length)];
+        allText = replacements(allText.split(""));
         processText();
       });
 
@@ -171,7 +172,10 @@
           "”": "\"",
           "—": "-",
           "’": "'",
-          "’": "'"
+          "’": "'",
+          "”": "\"",
+          "“": "\"",
+          "—": "-"
         };
         for (let idx = 0; idx < text.length; idx++) {
           let sym = text[idx];
